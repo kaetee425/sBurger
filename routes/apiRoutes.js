@@ -1,16 +1,13 @@
-var db = require("../models/burger.js");
+var db = require("../models");
+var express = require("express");
 
 module.exports = function(app){
 
 	app.get("/", function(req, res){
-		// var hbsObj = {
-		// 	burgers:
-		// };
-		// console.log(hbsObj);
-
 		db.Burger.findAll({}).then(function(dbBurger){
+			console.log(dbBurger)
 			res.render("index", dbBurger)
-			// res.json(dbBurger)
+			// res.json("this works " + dbBurger)
 		});
 	});
 

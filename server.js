@@ -1,7 +1,9 @@
 var express = require("express");
+var override = require("method-override")
 var bodyParser = require("body-parser");
+var path = require("path");
 
-var port = process.env.PORT || 3333;
+var port = process.env.port || 3322;
 var app = express();
 
 var db = require("./models");
@@ -16,6 +18,8 @@ var exphbhs = require("express-handlebars");
 
 app.engine("handlebars", exphbhs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
+
+
 
 require("./routes/apiRoutes.js")(app);
 
