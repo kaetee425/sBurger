@@ -1,17 +1,24 @@
 var db = require("../models");
-var express = require("express");
 
 module.exports = function(app){
 
 	app.get("/", function(req, res){
-		db.Burger.findAll({}).then(function(dbBurger){
-			console.log(dbBurger)
-			res.render("index", dbBurger)
+		db.Burger.findAll({}).then(function(data){
+			var hbsObject = {
+				Burger: data
+			};
+			res.render("index", hbsObject);
 			// res.json("this works " + dbBurger)
 		});
 	});
 
-	app.post("/api/burgers", function(req, res){
+	app.get("/api/Burger", function(req,res) {
+		db.Burger.findAll({}).then(function(data) {
+			res.send(data);
+		});
+	});
+
+	app.post("/api/Burger", function(req, res){
 		db.Burger.create({
 			burger_name: req.body.burger_name,
 			devoured: req.body.devoured
@@ -22,20 +29,13 @@ module.exports = function(app){
 		});
 	});
 
-	app.put("/api/burgers/:id", function(req, res){
-		// var condition = "id = " + req.params.id;
-
-		// console.log("condition", condition);
-
-		// burger.updateOne({devoured: true}, condition, function(result){
-		// 	res.send(result);
-		// });
+	app.put("/api/Burger/:id", function(req, res){
 		db.Burger.update({
 			burger_name: req.body.burger_name,
 			devoured: req.body.devoured
 		},{
 			where: {
-				id: req.body.id
+				id: req.params.id
 			}
 		}).then(function(dbPut){
 			res.json(dbPut);

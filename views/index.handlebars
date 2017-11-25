@@ -5,7 +5,7 @@
     <div class="row">
         
         <div class="col s6">
-          {{#each burgers}}
+          {{#each Burger}}
             {{#unless this.devoured}}
               <div id="burgerNOW">
                   {{this.burger_name}}
@@ -18,7 +18,7 @@
         </div>
 
         <div class="col s6">
-          {{#each burgers}}
+          {{#each Burger}}
             {{#if this.devoured}}
               <div class='badBurger'>
                 <div>

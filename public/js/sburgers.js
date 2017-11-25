@@ -4,10 +4,11 @@ $(document).ready(function(){
 		event.preventDefault();
 
 		var newBurger = {
-			name: $("#newMeat").val().trim(),
+			burger_name: $("#newMeat").val().trim()
 		};
+		console.log(newBurger)
 
-		$.ajax("/api/burgers", {
+		$.ajax("/api/Burger", {
 			type: "POST",
 			data: newBurger
 		}).then(function(){
@@ -17,15 +18,17 @@ $(document).ready(function(){
 	});
 
 	$(".eatMe-btn").on("click", function(event){
-		console.log("something")
+		console.log("something2")
 		event.preventDefault();
 
+		var newState = $(this).attr("data-newstate", true)
 		 
-		$.ajax("/api/burgers/" + $(this).attr("data-id"), {
-			type: "PUT"
+		$.ajax("/api/Burger/" + $(this).attr("data-id"), {
+			type: "PUT",
 		}).then(function(){
 			console.log("EATEN")
-			location.reload();
+			console.log(this.devoured)
+			// location.reload();
 		})
 	})
 });
